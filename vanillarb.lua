@@ -1,0 +1,5 @@
+assert(SMODS.load_file("content/bisexual.lua"))()
+assert(SMODS.load_file("content/vouchers.lua"))()
+assert(SMODS.load_file("content/decks.lua"))()
+assert(SMODS.load_file("content/stakes.lua"))()
+assert(SMODS.load_file("content/starting_params.lua"))()

@@ -1,0 +1,15 @@
+{
+    "id": "vanillarb",
+    "name": "Vanilla ReBalanced",
+    "author": ["pi_cubed"],
+    "description": "balanced and expanded!",
+    "prefix": "vanillarb",
+    "main_file": "vanillarb.lua",
+    "badge_colour": "e14159",
+    "display_name": "ReBalanced",
+    "dependencies": [
+        "Steamodded (>=1.0.0~BETA-0711a)"
+    ],
+    "version": "1.0.0",
+    "allow_redistribution": true
+}

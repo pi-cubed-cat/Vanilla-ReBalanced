@@ -1,0 +1,33 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''
+{type = (G.GAME.used_vouchers["v_illusion"] and pseudorandom(pseudoseed('illusion')) > 0.6) and 'Enhanced' or 'Base', val = G.GAME.playing_card_rate},
+'''
+position = "at"
+payload = '''
+{type = (G.GAME.used_vouchers["v_magic_trick"] and pseudorandom(pseudoseed('illusion')) > 0.3) and 'Enhanced' or 'Base', val = G.GAME.playing_card_rate},
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''
+if (v.type == 'Base' or v.type == 'Enhanced') and G.GAME.used_vouchers["v_illusion"] and pseudorandom(pseudoseed('illusion')) > 0.8 then 
+  card:set_edition(poll_edition('illusion', nil, true, true))
+end
+'''
+position = "at"
+payload = '''
+if (v.type == 'Base' or v.type == 'Enhanced') and G.GAME.used_vouchers["v_magic_trick"] then
+    card:set_edition(SMODS.poll_edition { key = "illusion", mod = 2, no_negative = true })
+    card:set_seal(SMODS.poll_seal({ mod = 10 }))
+end
+'''
+match_indent = true
