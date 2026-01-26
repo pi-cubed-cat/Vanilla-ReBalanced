@@ -19,3 +19,16 @@ SMODS.Back:take_ownership('black', {
         return { vars = { self.config.joker_slot, self.config.discards } }
     end,
 }, false)
+
+SMODS.Back:take_ownership('anaglyph', {
+    apply = function(self, back)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                add_tag(Tag('tag_double'))
+                play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+                play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+                return true
+            end
+        }))
+    end,
+}, false)
