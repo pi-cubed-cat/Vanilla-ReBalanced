@@ -1,0 +1,32 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+level_up_hand(used_tarot, self.ability.consumeable.hand_type)
+'''
+position = "at"
+payload = '''
+level_up_hand(used_tarot, self.ability.consumeable.hand_type, nil, area == G.pack_cards and 2 or 1)
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''
+if pseudorandom('soul_'.._type..G.GAME.round_resets.ante) > 0.997 then
+    forced_key = 'c_black_hole'
+end
+'''
+position = "at"
+payload = '''
+if pseudorandom('soul_'.._type..G.GAME.round_resets.ante) > 0.9 then
+    forced_key = 'c_black_hole'
+end
+'''
+match_indent = true

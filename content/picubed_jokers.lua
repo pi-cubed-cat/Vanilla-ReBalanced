@@ -1,27 +1,3 @@
-SMODS.Joker:take_ownership('matador', { -- Matador
-    cost = 6,
-    config = { extra = { money = 3 } },
-	loc_vars = function(self, info_queue, card)
-		return { vars = { card.ability.extra.money } }
-	end,
-	calculate = function(self, card, context)
-        if context.individual and context.cardarea == G.play and G.GAME.current_round.hands_left == 0 and G.GAME.blind and G.GAME.blind.boss then
-			G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.money
-            return {
-                dollars = card.ability.extra.money,
-                func = function()
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            G.GAME.dollar_buffer = 0
-                            return true
-                        end
-                    }))
-                end
-            }
-		end
-	end
-}, false)
-
 SMODS.Atlas {
     key = "PiCubedsJokers",
     path = "picubedsjokers.png",
@@ -620,4 +596,64 @@ SMODS.Joker { -- Wee Mini
             }
         end
     end
+}
+
+SMODS.Joker { --Forgery
+	key = 'forgery',
+	pronouns = 'he_they',
+	rarity = 3,
+	atlas = 'PiCubedsJokers',
+	pos = { x = 6, y = 5 },
+	cost = 9,
+	discovered = true,
+	blueprint_compat = true,
+	perishable_compat = true,
+	eternal_compat = true,
+	calculate = function(self, card, context)
+		if context.cardarea == G.play and context.individual then
+			local card_is_kil = context.other_card
+			local card_mult = 0
+			if SMODS.has_no_rank(card_is_kil) then -- rankless cards
+				card_mult = card_mult + 0
+			else
+				card_mult = card_is_kil.base.nominal or 0
+			end
+			card_mult = card_mult + (card_is_kil.ability.perma_bonus or 0) + (card_is_kil.ability.perma_h_chips or 0)
+			if SMODS.has_enhancement(card_is_kil, 'm_bonus') then -- bonus card (vanilla)
+				card_mult = card_mult + 30
+			elseif SMODS.has_enhancement(card_is_kil, 'm_stone') then -- stone card (vanilla)
+				card_mult = card_mult + 50
+			elseif SMODS.has_enhancement(card_is_kil, 'm_akyrs_ash_card') then -- ash card (aikoyori's shenanigans)
+				card_mult = card_mult + 30
+			end
+			if card_is_kil.edition then
+				if card_is_kil.edition.key == 'e_foil' then -- foil (vanilla)
+						card_mult = card_mult + 50
+				elseif card_is_kil.edition.key == 'e_cry_noisy' then -- noisy (cryptid)
+						card_mult = card_mult + pseudorandom('noisy') * 150
+				elseif card_is_kil.edition.key == 'e_ortalab_anaglyphic' then -- anaglyphic (ortalab)
+						card_mult = card_mult + 20
+				elseif card_is_kil.edition.key == 'e_cry_mosaic' then -- mosaic (cryptid)
+						card_mult = 2.5 * card_mult
+				elseif card_is_kil.edition.key == 'e_akyrs_texelated' then -- texelated (aikoyori's shenanigans)
+						card_mult = 0.8 * card_mult
+				elseif card_is_kil.edition.key == 'e_bunc_glitter' then -- glitter (bunco)
+						card_mult = 1.3 * card_mult
+				elseif card_is_kil.edition.key == 'e_yahimod_evil' then -- evil (yahimod)
+						card_mult = 1.5 * card_mult
+				end
+			end
+			if card_is_kil.ability.perma_x_chips and card_is_kil.ability.perma_x_chips > 1 then
+				card_mult = card_mult * card_is_kil.ability.perma_x_chips
+			end
+			if card_is_kil.ability.perma_h_x_chips and card_is_kil.ability.perma_h_x_chips > 1 then
+				card_mult = card_mult * card_is_kil.ability.perma_h_x_chips
+			end
+			if card_mult > 0 then
+				return {
+					mult = card_mult
+				}	
+			end	 
+		end
+	end
 }

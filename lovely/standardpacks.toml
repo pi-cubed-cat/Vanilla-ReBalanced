@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+card = create_card((pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base", G.pack_cards, nil, nil, nil, true, nil, 'sta')
+'''
+position = "at"
+payload = '''
+card = create_card((pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.5) and "Enhanced" or "Base", G.pack_cards, nil, nil, nil, true, nil, 'sta')
+'''
+match_indent = true

@@ -25,6 +25,26 @@ return {
                 },
             },
         },
+        Edition = {
+            e_vanillarb_bisexual = {
+                name = "Bisexual",
+                label = "Bisexual",
+                text = {
+                    "Creates a {C:tarot}Tarot{} card",
+                    "at end of round",
+                    "{C:inactive}(Must have room){}"
+                }
+            },
+        },
+        Enhanced = {
+            m_wild = { -- Wild Cards
+                text = {
+                    "Can be used",
+                    "as any suit,",
+                    "cannot be debuffed",
+                },
+            },
+        },
         Joker = {
             j_square = { -- Square Joker
                 text = {
@@ -34,12 +54,56 @@ return {
                     "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
                 },
             },
-            j_matador = {
+            j_matador = { -- Matador
                 text = {
                     "On {C:attention}final hand{} of", 
                     "{C:attention}Boss Blind{}, played",
                     "cards earn {C:money}$#1#{}",
                     "when scored",
+                },
+            },
+            j_supernova = { -- Supernova
+                text = {
+                    "Adds the number of times",
+                    "{C:attention}poker hand{} has been",
+                    "played this run to {C:mult}Mult{}", -- this line got changed lol
+                },
+            },
+            j_superposition = { -- Superposition
+                text = {
+                    "Creates a copy of {C:tarot}The Fool{}",
+                    "if played hand contains an",
+                    "{C:attention}Ace{} and a {C:attention}Straight{}",
+                    "{C:inactive}(Must have room)",
+                }
+            },
+            j_flower_pot = { -- Flower Pot
+                text = {
+                    "{C:chips}+#1#{} Chips for each",
+                    "card of a unique suit",
+                    "in scoring hand",
+                },
+            },
+            j_splash = { -- Splash
+                text = {
+                    "{C:attention}Played cards",
+                    "are {C:attention}always{} scored",
+                },
+            },
+            j_bootstraps = { -- Bootstraps
+                text = {
+                    "Scoring {C:hearts}Hearts{} and {C:diamonds}Diamonds{}",
+                    "cards give {C:mult}+#1#{} Mult",
+                    "for every {C:money}$#2#{} you have",
+                    "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)",
+                },
+            },
+            j_loyalty_card = { -- Loyalty Card
+                text = {
+                    "Every {C:attention}#1#th{} scoring card",
+                    "gains a random {C:attention}Enhancement{},",
+                    "{C:dark_edition}Edition{}, or {C:attention}Seal{}",
+                    "{C:inactive}({C:attention}#2#{} {C:inactive}remaining){}",
                 },
             },
             j_vanillarb_moltenjoker = {
@@ -120,6 +184,7 @@ return {
                 text = {
                     "Retrigger the {C:attention}third{}",
                     "and {C:attention}fifth{} scoring cards",
+                    "each hand",
                 }
             },
             j_vanillarb_weemini = {
@@ -131,6 +196,35 @@ return {
                     "{C:inactive}(Currently {C:mult}+#2#{} {C:inactive}Mult){}",
                 }
             },
+            j_vanillarb_forgery = {
+                name = 'Forgery',
+                text = {
+                    "Played cards give {C:mult}+Mult{}",
+                    "equal to their {C:chips}Chips{}",
+                    "when scored",
+                }
+            },
+        },
+        Other = {
+            blue_seal = { -- Blue Seal
+                text = {
+                    "{C:green}#1# in #2#{} chance to",
+                    "create the {C:planet}Planet{} card",
+                    "for final played {C:attention}poker hand{}",
+                    "of round if {C:attention}held{} in hand",
+                    "{C:inactive}(Must have room)",
+                },
+            }
+        },
+        Spectral = {
+            c_sigil = {
+                text = {
+                    "Draw #1# cards to hand,",
+                    "then convert all",
+                    "cards in hand to a",
+                    "single random {C:attention}suit",
+                },
+            }
         },
         Voucher = {
             v_hone = { -- Hone
@@ -282,6 +376,12 @@ return {
                 text = {
                     "Adds a free {C:voucher}Voucher",
                     "to the next shop",
+                },
+            },
+            tag_juggle = { -- Juggle Tag
+                text = {
+                    "{C:attention}+#1#{} hand size",
+                    "for this {C:attention}Ante{}",
                 },
             },
         },

@@ -1,0 +1,66 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability.name == 'Raised Fist' then
+    local temp_Mult, temp_ID = 15, 15
+    local raised_card = nil
+    for i=1, #G.hand.cards do
+        if temp_ID >= G.hand.cards[i].base.id and not SMODS.has_no_rank(G.hand.cards[i]) then 
+            temp_Mult = G.hand.cards[i].base.nominal
+            temp_ID = G.hand.cards[i].base.id
+            raised_card = G.hand.cards[i]
+        end
+    end
+    if raised_card == context.other_card then 
+        if context.other_card.debuff then
+            return {
+                message = localize('k_debuffed'),
+                colour = G.C.RED,
+                card = self,
+            }
+        else
+            return {
+                h_mult = 2*temp_Mult,
+                card = self,
+            }
+        end
+    end
+end
+'''
+position = "at"
+payload = '''
+--[[
+if self.ability.name == 'Raised Fist' then
+    local temp_Mult, temp_ID = 15, 15
+    local raised_card = nil
+    for i=1, #G.hand.cards do
+        if temp_ID >= G.hand.cards[i].base.id and not SMODS.has_no_rank(G.hand.cards[i]) then 
+            temp_Mult = G.hand.cards[i].base.nominal
+            temp_ID = G.hand.cards[i].base.id
+            raised_card = G.hand.cards[i]
+        end
+    end
+    if raised_card == context.other_card then 
+        if context.other_card.debuff then
+            return {
+                message = localize('k_debuffed'),
+                colour = G.C.RED,
+                card = self,
+            }
+        else
+            return {
+                h_mult = 2*temp_Mult,
+                card = self,
+            }
+        end
+    end
+end
+]]
+'''
+match_indent = true
