@@ -1,7 +1,7 @@
 [manifest]
 version = "1.0.0"
 dump_lua = true
-priority = -1
+priority = 11
 
 [[patches]]
 [patches.pattern]
@@ -24,6 +24,24 @@ if _G["JokerDisplay"] then
 position = "before"
 payload = '''
 ]]
+--[[SMODS.Edition{
+    key = 'glitter',
+    no_collection = true,
+    in_pool = function() return false end,
+    config = {Xchips = 1.3},
+    weight = 0,
+    shader = 'foil',
+}
+
+SMODS.Edition{
+    key = 'fluorescent',
+    no_collection = true,
+    in_pool = function() return false end,
+    config = {Xchips = 1.3},
+    weight = 0,
+    shader = 'foil',
+}]]
+
 '''
 match_indent = true
 
@@ -38,3 +56,53 @@ payload = '''
 no_collection = true,
 '''
 match_indent = true
+
+# Glitter edition in poll_edition
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/overrides.lua"]'
+pattern = '''
+if BUNCOMOD.content.config.gameplay_reworks and (_key == "wheel_of_fortune" or _key == "aura") then 
+    table.insert(_options, 'e_bunc_glitter') 
+end
+'''
+position = 'at'
+match_indent = true
+payload = '''
+
+'''
+
+# Editions in boosters 1/2
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''
+consumable_edition = {rate = G.GAME.used_vouchers['v_bunc_lamination'] and 2 or 0, forced = G.GAME.used_vouchers['v_bunc_supercoating']}
+'''
+position = 'at'
+match_indent = true
+payload = '''
+
+'''
+
+# Editions in boosters 2/2
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''
+local edition = poll_edition('standard_edition'..G.GAME.round_resets.ante, consumable_edition.rate or 0, true, consumable_edition.forced or false,
+{'e_holo', 'e_foil', 'e_polychrome', 'e_bunc_glitter'})
+if not card.edition then
+    for _, card_type in ipairs(SMODS.ConsumableType.ctype_buffer) do
+        if card.ability.set == card_type then
+            card:set_edition(edition)
+            break
+        end
+    end
+end
+'''
+position = 'at'
+match_indent = true
+payload = '''
+
+'''
