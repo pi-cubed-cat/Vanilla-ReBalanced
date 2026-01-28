@@ -1,0 +1,40 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Bunco "Bunco.lua"]'
+pattern = '''
+SMODS.Atlas({key = 'bunco_decks', path = 'Decks/Decks.png', px = 71, py = 95})
+'''
+position = "before"
+payload = '''
+--[[
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Bunco "Bunco.lua"]'
+pattern = '''
+if _G["JokerDisplay"] then
+'''
+position = "before"
+payload = '''
+]]
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Bunco "Bunco.lua"]'
+pattern = '''
+secondary_colour = HEX('4fb66f'),
+'''
+position = "after"
+payload = '''
+no_collection = true,
+'''
+match_indent = true

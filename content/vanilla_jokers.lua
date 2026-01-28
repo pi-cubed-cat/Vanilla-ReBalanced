@@ -377,3 +377,63 @@ SMODS.Joker:take_ownership('raised_fist', { -- Raised Fist
         end
     end
 }, false)
+
+SMODS.Atlas {
+    key = "newjoker",
+    path = "newjoker.png",
+    px = 71,
+    py = 95
+}
+
+SMODS.Joker:take_ownership('8_ball', { -- 8 Ball
+    atlas = 'newjoker',
+    pos = { x = 1, y = 0 },
+}, false)
+
+SMODS.Joker { -- Chaos Theory
+    key = 'chaostheory',
+	rarity = 2,
+	atlas = 'newjoker',
+	pos = { x = 0, y = 0 },
+	cost = 6,
+	discovered = true,
+	blueprint_compat = true,
+	perishable_compat = false,
+	eternal_compat = true,
+	config = { extra = { xmult = 1, xmult_mod = 0.1, poker_hand = 'High Card' } },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.xmult_mod, card.ability.extra.xmult, localize(card.ability.extra.poker_hand, 'poker_hands') } }
+	end,
+	calculate = function(self, card, context)
+        if context.before and context.scoring_name == card.ability.extra.poker_hand and not context.blueprint then
+            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_mod
+            return {
+                message = localize('k_upgrade_ex'),
+                colour = G.C.MULT
+            }
+        end
+        if context.after and context.main_eval and not context.blueprint then
+            local _poker_hands = {}
+            for handname, _ in pairs(G.GAME.hands) do
+                if SMODS.is_poker_hand_visible(handname) and handname ~= card.ability.extra.poker_hand then
+                    _poker_hands[#_poker_hands + 1] = handname
+                end
+            end
+            card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, 'chaostheory')
+        end
+        if context.joker_main then
+            return {
+                Xmult = card.ability.extra.Xmult
+            }
+        end
+    end,
+    set_ability = function(self, card, initial, delay_sprites)
+        local _poker_hands = {}
+        for handname, _ in pairs(G.GAME.hands) do
+            if SMODS.is_poker_hand_visible(handname) and handname ~= card.ability.extra.poker_hand then
+                _poker_hands[#_poker_hands + 1] = handname
+            end
+        end
+        card.ability.extra.poker_hand = pseudorandom_element(_poker_hands, 'chaostheory')
+    end
+}

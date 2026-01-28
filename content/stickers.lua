@@ -23,30 +23,3 @@ function Card:calculate_perishable()
     end
     calculate_perishable_ref(self)
 end
-
-SMODS.Sticker:take_ownership("perishable", { -- Perishable sticker
-    in_pool = false,
-}, true)
-
-SMODS.Stake:take_ownership('gold', { -- Gold stake (anti-bunco)
-    applied_stakes = {'orange'},
-    above_stake = 'orange'
-})
-
-SMODS.Stake:take_ownership('bunco_cyan', { -- Cyan stake (anti-bunco)
-    should_apply = function(self, card, center, area, bypass_roll)
-        return false
-    end
-})
-
-SMODS.Stake:take_ownership('bunco_pink', { -- Pink stake (anti-bunco)
-    should_apply = function(self, card, center, area, bypass_roll)
-        return false
-    end
-})
-
-SMODS.Stake:take_ownership('bunco_magenta', { -- Magenta stake (anti-bunco)
-    should_apply = function(self, card, center, area, bypass_roll)
-        return false
-    end
-})

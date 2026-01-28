@@ -57,7 +57,7 @@ SMODS.Tag:take_ownership("negative", { -- Negative Tag
             G.CONTROLLER.locks[lock] = true
             tag:yep('+', G.C.DARK_EDITION, function()
                 for _ = 1, tag.config.spawn_jokers do
-                    if G.jokers and #G.jokers.cards < G.jokers.config.card_limit then
+                    if G.jokers and #G.jokers.cards < G.jokers.config.card_limit + 1 then
                         SMODS.add_card {
                             set = "Joker",
                             edition = 'e_negative',

@@ -25,6 +25,14 @@ return {
                 },
             },
         },
+        Blind = {
+            bl_serpent = { -- The Serpent
+                text = {
+                    "After Play or Discard,",
+                    "cannot draw over 3 cards",
+                },
+            },
+        },
         Edition = {
             e_vanillarb_bisexual = {
                 name = "Bisexual",
@@ -105,6 +113,15 @@ return {
                     "{C:dark_edition}Edition{}, or {C:attention}Seal{}",
                     "{C:inactive}({C:attention}#2#{} {C:inactive}remaining){}",
                 },
+            },
+            j_vanillarb_chaostheory = { -- Chaos Theory
+                name = 'Chaos Theory',
+                text = {
+                    "This Joker gains {X:mult,C:white}X#1#{} Mult",
+                    "if played hand is a {C:attention}#3#{}",
+                    "{s:0.8}poker hand changes every {C:attention,s:0.8}hand{}",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{} {C:inactive}Mult){}",
+                }
             },
             j_vanillarb_moltenjoker = {
                 name = 'Molten Joker',
@@ -293,8 +310,7 @@ return {
                 name = "Gold Stake",
                 text = {
                     "Win after {C:attention}Ante 10{},",
-                    "face {C:attention}Showdown Boss Blinds{}",
-                    "in Ante 8 and Ante 10",
+                    "{s:0.8}face {s:0.8,C:attention}Showdown Boss Blinds {s:0.8}in Antes 8 and 10",
                     "{s:0.8}Applies all previous Stakes",
                 },
             },
