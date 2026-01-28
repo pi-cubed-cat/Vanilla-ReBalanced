@@ -1,3 +1,7 @@
+function calculate_cracker_cards(context)
+
+end
+
 SMODS.PokerHand:take_ownership('bunc_Spectrum', { -- Spectrum
     visible = false,
     no_collection = true,
