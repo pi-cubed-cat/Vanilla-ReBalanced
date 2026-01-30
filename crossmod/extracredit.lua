@@ -70,7 +70,7 @@ SMODS.Joker:take_ownership('ExtraCredit_handbook', {
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main and card.ability.extra.mult > 0 then
             return {
-                message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
+                --message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
                 mult = card.ability.extra.mult
             }
         elseif context.cardarea == G.jokers and G.GAME.hands[context.scoring_name] and G.GAME.hands[context.scoring_name].played_this_round == 1 and not context.blueprint and context.before then 
