@@ -15,7 +15,7 @@ Vanilla ReBalanced initially includes 13 new Jokers, mostly with art and/or abil
 
 ## Changes
 ### Hands and Discards
-- By default, you now start with 3 Hands and 4 discards, and earn $2 per remaining Hand at end of round.
+- By default, you now start with 3 Hands and 4 discards, and earn $2 per remaining Hand at end of round (From BU's video)
    
 ### Jokers (reworks)
 - Loyalty Card
