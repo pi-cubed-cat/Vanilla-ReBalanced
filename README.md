@@ -66,7 +66,7 @@ Vanilla ReBalanced initially includes 13 new Jokers, mostly with art and/or abil
 - Fortune Teller costs $6 -> $4 (From FS's video)
 - Hanging Chad is Common -> Uncommon (From FS's video)
 
-## Vouchers
+### Vouchers
 - Hone and Glow up now affect cards in the shop created by Magic Trick, and make the new Bisexual edition more likely to appear
 - Telescope has been reworked: Your most played poker hand's corresponding Planet card may appear multiple times
 - Tarot Tycoon has been reworked: Every shop has an additional free Mega Arcana Pack
@@ -74,40 +74,40 @@ Vanilla ReBalanced initially includes 13 new Jokers, mostly with art and/or abil
 - Magic Trick now allows for cards to appear with Enhancements, Editions and/or Seals (bug fixed!) without needing Illusion (From BU's video)
 - Illusion has been reworked: Spectral cards can be purchased from the Shop
 
-## Decks
+### Decks
 - Green Deck gives $2 -> $3 per hand and $1 -> $2 per discard (To accomodate the lower starting number of Hands)
 - Black Deck starts with -1 hand -> -1 discard (To accomodate the lower starting number of Hands)
 - Ghost Deck now starts with the reworked Magic Trick and Illusion vouchers instead of simply adding Spectral cards to the shop
 - Anaglyph Deck now also begins with creating a Double Tag at the start of run
 
-## Booster Packs
+### Booster Packs
 - All Standard Packs have 1 additional card to choose from
 - Playing cards in Standard Packs have a 40% -> 50% chance to be enhanced (From BU's video)
 - Planet cards (excluding Black Hole) in Celestial Packs upgrades the hand level twice (From BU's video)
 - Black Hole has a 0.3% -> 10% chance to replace each card in Celestial Packs and Spectral Packs (From BU's video)
 
-## Spectral Cards
+### Spectral Cards
 - Sigil now draws 3 additional cards to hand before activating
 - Black Hole has a 0.3% -> 10% chance to replace each card in Celestial Packs and Spectral Packs (From BU's video)
 
-## Enhancements & Seals
+### Enhancements & Seals
 - Mult cards give +4 -> +5 Mult when scored (From BU's video)
 - Wild cards cannot be debuffed (From FS's video)
 - Stone cards give +50 -> +75 Chips when scored
 - Blue Seal now has only a 1 in 2 chance to activate (inspired from remarks BU has made before)
 
-## Tags
+### Tags
 - Uncommon Tag, Rare Tag, Negative Tag, Foil Tag, Holographic Tag, and Polychrome Tag now create a Joker immediately (From FS's video)
   - The created Joker cannot have stickers
 - Voucher Tag's created voucher is free
 - Juggle Tag gives hand size for the Ante
 - Orbital Tag upgrades the hand by 3 -> 4 levels (To allow the tag to keep up with Celestial Pack buffs)
 
-## Blinds
+### Blinds
 - The Serpent no longer overdraws cards (from LocalThunk accidentally believing his dev build is public knowledge)
 - Violet Vessel's blind size is 6X -> 5X Base (From FS's video)
 
-## Stakes
+### Stakes
 - Blue Stake now has the effect of vanilla Purple Stake
 - Purple Stake now has the effect of vanilla Orange Stake
   -  Perishable Jokers now become negative after being debuffed (From FS's video)
