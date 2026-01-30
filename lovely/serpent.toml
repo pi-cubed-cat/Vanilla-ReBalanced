@@ -1,0 +1,19 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+G.hand.config.card_limits.blind_restriction = hand_space - math.min(#G.deck.cards, 3)
+hand_space = math.min(#G.deck.cards, 3)
+'''
+position = "at"
+payload = '''
+local num_cards = math.max(0, math.min(#G.deck.cards, 3, G.hand.config.card_limit - #G.hand.cards))
+G.hand.config.card_limits.blind_restriction = hand_space - num_cards
+hand_space = num_cards
+'''
+match_indent = true
