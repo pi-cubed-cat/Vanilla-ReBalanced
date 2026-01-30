@@ -106,3 +106,18 @@ match_indent = true
 payload = '''
 
 '''
+
+# auto-disable "Gameplay Reworks" config
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Bunco "Bunco.lua"]'
+pattern = '''
+if config.gameplay_reworks then
+
+    BUNCOMOD.content.config.gameplay_reworks = true
+'''
+position = 'before'
+match_indent = true
+payload = '''
+config.gameplay_reworks = false
+'''

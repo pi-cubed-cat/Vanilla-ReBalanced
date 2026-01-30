@@ -423,7 +423,7 @@ SMODS.Joker { -- Chaos Theory
         end
         if context.joker_main then
             return {
-                Xmult = card.ability.extra.Xmult
+                Xmult = card.ability.extra.xmult
             }
         end
     end,
