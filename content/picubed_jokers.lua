@@ -584,9 +584,9 @@ SMODS.Joker { -- Wee Mini
                 end
             end
             if #ranks_list >= 2 then 
-                card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.hand_add
+                card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
                 return {
-                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.hand_add } }
+                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult_mod } }
                 }
             end
         end
