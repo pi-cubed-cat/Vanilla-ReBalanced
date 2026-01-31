@@ -576,14 +576,17 @@ SMODS.Joker { -- Wee Mini
 	calculate = function(self, card, context)
         if context.before and not context.blueprint then
             local ranks_list = {}
+			local ranks_count = 0
             for _, v in ipairs(context.scoring_hand) do
                 if SMODS.has_no_rank(v) then
-                    ranks_list['rankless'] = true
+                    if not ranks_list['rankless'] then ranks_count = ranks_count + 1 end
+					ranks_list['rankless'] = true
                 else
+					if not ranks_list[v:get_id()] then ranks_count = ranks_count + 1 end
                     ranks_list[v:get_id()] = true
                 end
             end
-            if #ranks_list >= 2 then 
+            if ranks_count >= 2 then 
                 card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
                 return {
                     message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult_mod } }
