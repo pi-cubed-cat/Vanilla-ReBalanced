@@ -1,4 +1,4 @@
-SMODS.Shader({ key = 'bisexual', path = 'bisexual.fs' })
+--SMODS.Shader({ key = 'bisexual', path = 'bisexual.fs' })
 
 SMODS.Edition {
 	key = "bisexual",
@@ -13,7 +13,12 @@ SMODS.Edition {
         }
     },
 	weight = 3,
-	shader = "bisexual",
+	--shader = "bisexual",
+	shader = "polychrome", -- compat
+    prefix_config = {
+        -- This allows using the vanilla shader
+        shader = false
+    },
 	in_shop = true,
 	extra_cost = 4,
 	sound = { sound = "polychrome1", per = 1.1, vol = 0.7 },
