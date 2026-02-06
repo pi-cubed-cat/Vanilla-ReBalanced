@@ -3,6 +3,7 @@ version = "1.0.0"
 dump_lua = true
 priority = 11
 
+# starts comment at line 7304
 [[patches]]
 [patches.pattern]
 target = '=[SMODS Bunco "Bunco.lua"]'
@@ -15,6 +16,7 @@ payload = '''
 '''
 match_indent = true
 
+# ends comment at line 8902
 [[patches]]
 [patches.pattern]
 target = '=[SMODS Bunco "Bunco.lua"]'
@@ -45,6 +47,7 @@ SMODS.Edition{
 '''
 match_indent = true
 
+# hide polymino consumables
 [[patches]]
 [patches.pattern]
 target = '=[SMODS Bunco "Bunco.lua"]'
@@ -120,4 +123,18 @@ position = 'before'
 match_indent = true
 payload = '''
 config.gameplay_reworks = false
+'''
+
+# Remove exotic suit customization
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+pattern = '''
+if G.COLLABS.options[suit.key] and
+(suit.key ~= 'bunc_Fleurons' or (suit.key == 'bunc_Fleurons' and G.P_CENTERS['b_bunc_fairy'].unlocked)) and
+(suit.key ~= 'bunc_Halberds' or (suit.key == 'bunc_Halberds' and G.P_CENTERS['b_bunc_fairy'].unlocked)) then'''
+position = 'at'
+match_indent = true
+payload = '''
+if G.COLLABS.options[suit.key] then
 '''
