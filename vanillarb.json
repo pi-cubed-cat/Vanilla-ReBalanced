@@ -2,7 +2,7 @@
     "id": "vanillarb",
     "name": "Vanilla ReBalanced",
     "author": ["pi_cubed"],
-    "description": "balanced and expanded!",
+    "description": "Aims to balance existing vanilla content and add new Jokers for the sake of build variety in high stakes. These ideas were largely proposed by content creators Balatro University and FocusSh0ck. Check the README for more info!",
     "prefix": "vanillarb",
     "main_file": "vanillarb.lua",
     "badge_colour": "e14159",
@@ -11,6 +11,6 @@
         "Steamodded (>=1.0.0~BETA-0827)"
     ],
     "priority": 2,
-    "version": "1.0.1f~BETA",
+    "version": "1.0.1g~BETA",
     "allow_redistribution": true
 }
