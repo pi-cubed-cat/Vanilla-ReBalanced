@@ -660,3 +660,37 @@ SMODS.Joker { --Forgery
 		end
 	end
 }
+
+SMODS.Joker { --Mount Joker
+	key = 'mountjoker',
+	pronouns = 'he_they',
+	rarity = 2,
+	config = { extra = { Xmult = 1.5 } },
+	atlas = 'PiCubedsJokers',
+	pos = { x = 7, y = 5 },
+	cost = 7,
+	discovered = true,
+	blueprint_compat = true,
+    perishable_compat = true,
+	eternal_compat = true,
+	in_pool = function(self, args)
+		for kk, vv in pairs(G.playing_cards or {}) do
+			if picubed_is_stonelike(vv) then
+				return true
+			end
+		end
+		return false
+	end,
+	loc_vars = function(self, info_queue, card)
+        picubed_stonelike_infoqueue(info_queue)
+		return { vars = { card.ability.extra.Xmult } }
+	end,
+	calculate = function(self, card, context)
+		if context.individual and context.cardarea == G.play
+		and picubed_is_stonelike(context.other_card) then
+			return {
+				xmult = card.ability.extra.Xmult
+			}
+        end
+	end
+}

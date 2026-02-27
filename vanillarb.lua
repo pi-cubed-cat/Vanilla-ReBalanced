@@ -1,4 +1,6 @@
-assert(SMODS.load_file("content/bisexual.lua"))()
+if not next(SMODS.find_mod("picubedsjokers")) then
+    assert(SMODS.load_file("content/bisexual.lua"))()
+end
 assert(SMODS.load_file("content/vouchers.lua"))()
 assert(SMODS.load_file("content/decks.lua"))()
 assert(SMODS.load_file("content/stakes.lua"))()

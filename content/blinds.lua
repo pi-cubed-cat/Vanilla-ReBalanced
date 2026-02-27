@@ -16,3 +16,7 @@ SMODS.Blind:take_ownership('serpent', { -- The Serpent
         end
     end]]
 }, false)
+
+SMODS.Blind:take_ownership('water', { -- Violet Vessel
+    mult = 1
+}, false)

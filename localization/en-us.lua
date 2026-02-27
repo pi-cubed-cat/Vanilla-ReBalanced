@@ -221,6 +221,13 @@ return {
                     "when scored",
                 }
             },
+            j_vanillarb_mountjoker = {
+                name = 'Mount Joker',
+                text = {
+                    "Played {C:attention}Stone{} cards give",
+                    "{X:mult,C:white}X#1#{} Mult when scored",
+                }
+            },
         },
         Other = {
             blue_seal = { -- Blue Seal

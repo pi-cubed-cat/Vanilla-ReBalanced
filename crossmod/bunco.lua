@@ -44,7 +44,7 @@ SMODS.PokerHand:take_ownership('bunc_Deal', { -- Deal
 
 local banned_bunco_jokers= {
     'cassette',
-    --'mosaic',
+    'mosaic',
     'voxel',
     'crop_circles',
     'xray',
