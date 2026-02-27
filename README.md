@@ -73,6 +73,7 @@ Vanilla ReBalanced initially includes 13 new Jokers, mostly with art and/or abil
 - Planet Tycoon has been reworked: Negative Planet cards can be purchased from the Shop
 - Magic Trick now allows for cards to appear with Enhancements, Editions and/or Seals (bug fixed!) without needing Illusion (From BU's video)
 - Illusion has been reworked: Spectral cards can be purchased from the Shop
+- Hieroglyph and Petroglyph have their abilities swapped (To accomodate the lower starting number of Hands)
 
 ### Decks
 - Green Deck gives $2 -> $3 per hand and $1 -> $2 per discard (To accomodate the lower starting number of Hands)
@@ -86,15 +87,16 @@ Vanilla ReBalanced initially includes 13 new Jokers, mostly with art and/or abil
 - Planet cards (excluding Black Hole) in Celestial Packs upgrades the hand level twice (From BU's video)
 - Black Hole has a 0.3% -> 10% chance to replace each card in Celestial Packs and Spectral Packs (From BU's video)
 
-### Spectral Cards
+### Spectral & Tarot Cards
 - Sigil now draws 3 additional cards to hand before activating
 - Black Hole has a 0.3% -> 10% chance to replace each card in Celestial Packs and Spectral Packs (From BU's video)
+- The Chariot can now enhance up to 1 -> 2 selected cards to Steel Cards
 
 ### Enhancements & Seals
-- Mult cards give +4 -> +5 Mult when scored (From BU's video)
-- Wild cards cannot be debuffed (From FS's video)
-- Stone cards give +50 -> +75 Chips when scored
-- Blue Seal now has only a 1 in 2 chance to activate (inspired from remarks BU has made before)
+- Mult Cards give +4 -> +5 Mult when scored (From BU's video)
+- Wild Cards cannot be debuffed (From FS's video)
+- Stone Cards give +50 -> +75 Chips when scored
+- Blue Seals now has a 0 in 5 chance to activate, with these odds increasing by 1 per played and scoring card in final played hand
 
 ### Tags
 - Uncommon Tag, Rare Tag, Negative Tag, Foil Tag, Holographic Tag, and Polychrome Tag now create a Joker immediately (From FS's video)

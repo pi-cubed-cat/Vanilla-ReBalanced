@@ -12,6 +12,7 @@ end
 assert(SMODS.load_file("content/blinds.lua"))()
 assert(SMODS.load_file("content/enhancements.lua"))()
 assert(SMODS.load_file("content/spectrals.lua"))()
+assert(SMODS.load_file("content/tarots.lua"))()
 assert(SMODS.load_file("content/stickers.lua"))()
 assert(SMODS.load_file("content/boosterpacks.lua"))()
 assert(SMODS.load_file("content/seals.lua"))()

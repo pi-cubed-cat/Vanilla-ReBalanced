@@ -232,16 +232,26 @@ return {
         Other = {
             blue_seal = { -- Blue Seal
                 text = {
-                    "{C:green}#1# in #2#{} chance to",
-                    "create the {C:planet}Planet{} card",
-                    "for final played {C:attention}poker hand{}",
-                    "of round if {C:attention}held{} in hand",
+                    "{C:green}#3# in #2#{} chance to create",
+                    "the {C:planet}Planet{} card for final",
+                    "played {C:attention}poker hand{} of round",
+                    "if {C:attention}held{} in hand, {C:green}Odds{} increase",
+                    "by {C:green}#1#{} per {C:attention}scoring{} played card",
                     "{C:inactive}(Must have room)",
                 },
             }
         },
+        Tarot = { -- The Chariot
+            c_chariot = {
+                text = {
+                    "Enhances {C:attention}#1#{}",
+                    "selected cards to",
+                    "{C:attention}#2#s",
+                },
+            },
+        },
         Spectral = {
-            c_sigil = {
+            c_sigil = { -- Sigil
                 text = {
                     "Draw #1# cards to hand,",
                     "then convert all",
@@ -303,34 +313,44 @@ return {
                     "appear multiple times",
                 }
             },
+            v_hieroglyph = { -- Hieroglyph
+                text = {
+                    "{C:attention}-#1#{} Ante,",
+                    "{C:red}-#1#{} discard",
+                    "each round",
+                },    
+            },
+            v_petroglyph = { -- Petroglyph
+                text = {
+                    "{C:attention}-#1#{} Ante,",
+                    "{C:blue}-#1#{} hand",
+                    "each round",
+                },
+            },
         },
         Stake = {
-            stake_blue = {
-                name = "Blue Stake",
+            stake_blue = { -- Blue Stake
                 text = {
                     "Required score scales",
                     "faster for each {C:attention}Ante",
                     "{s:0.8}Applies all previous Stakes",
                 },
             },
-            stake_gold = {
-                name = "Gold Stake",
+            stake_gold = { -- Gold Stake
                 text = {
                     "Win after {C:attention}Ante 10{},",
                     "{s:0.8}face {s:0.8,C:attention}Showdown Boss Blinds {s:0.8}in Antes 8 and 10",
                     "{s:0.8}Applies all previous Stakes",
                 },
             },
-            stake_orange = {
-                name = "Orange Stake",
+            stake_orange = { -- Orange Stake
                 text = {
                     "Shop can have {C:attention}Rental{} Jokers",
                     "{C:inactive,s:0.8}(Costs {C:money,s:0.8}$3{C:inactive,s:0.8} per round)",
                     "{s:0.8}Applies all previous Stakes",
                 },
             },
-            stake_purple = {
-                name = "Purple Stake",
+            stake_purple = { -- Purple Stake
                 text = {
                     "Shop can have {C:attention}Perishable{} Jokers",
                     "{C:inactive,s:0.8}(Debuffed after 5 Rounds)",

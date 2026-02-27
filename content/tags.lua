@@ -155,7 +155,7 @@ SMODS.Tag:take_ownership('juggle', { -- Juggle Tag
 }, false)
 
 SMODS.Tag:take_ownership('orbital', { -- Orbital Tag
-    config = { levels = 4 },
+    config = {type = 'immediate', levels = 4},
 }, false)
 
 local set_cost_ref = Card.set_cost
