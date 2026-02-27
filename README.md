@@ -78,7 +78,7 @@ Vanilla ReBalanced initially includes 13 new Jokers, mostly with art and/or abil
 - Green Deck gives $2 -> $3 per hand and $1 -> $2 per discard (To accomodate the lower starting number of Hands)
 - Black Deck starts with -1 hand -> -1 discard (To accomodate the lower starting number of Hands)
 - Ghost Deck now starts with the reworked Magic Trick and Illusion vouchers instead of simply adding Spectral cards to the shop
-- Anaglyph Deck now also begins with creating a Double Tag at the start of run
+- Anaglyph Deck now also begins with creating a Double Tag at the start of run (From FS's video)
 
 ### Booster Packs
 - All Standard Packs have 1 additional card to choose from
@@ -105,6 +105,7 @@ Vanilla ReBalanced initially includes 13 new Jokers, mostly with art and/or abil
 
 ### Blinds
 - The Serpent no longer overdraws cards (from LocalThunk accidentally believing his dev build is public knowledge)
+- The Water's blind size is 2X -> 1X Base (To accomodate the lower starting number of Hands)
 - Violet Vessel's blind size is 6X -> 5X Base (From FS's video)
 
 ### Stakes
