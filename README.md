@@ -11,7 +11,8 @@ https://www.youtube.com/watch?v=8lli4u6jKCg
 https://www.youtube.com/watch?v=pA_DiPpJkX8
 
 ## Additions
-Vanilla ReBalanced initially includes 13 new Jokers, mostly with art and/or abilities lifted from my other mods. Chaos Theory's card art was designed by LumpyTouch, and was intended to be implemented for Balatro but scrapped. Wee Mini and Forgery have new abilities based on some ideas presented in BU's video. In addition, the mod includes a new edition and a related tag, intended to be a new method of obtaining Tarot cards. With Extra Credit and Bunco as intended, Vanilla ReBalanced also includes 35 new Jokers and 3 new decks from Extra Credit, and 12 Jokers and 19 blinds from Bunco. The new Jokers and edition are added to help with build variety, and some to give love to ranks, enhancements, and hands with little existing synergies. The new blinds are added to generally provide more variety, especially for Gold Stake's new effect.
+Vanilla ReBalanced initially includes 14 new Jokers, mostly with art and/or abilities lifted from my other mods. Chaos Theory's card art was designed by LumpyTouch, and was intended to be implemented for Balatro but scrapped. Wee Mini and Forgery have new abilities based on some ideas presented in BU's video. In addition, the mod includes a new edition and a related tag, intended to be a new method of obtaining Tarot cards.  
+With Extra Credit and Bunco as intended, Vanilla ReBalanced also includes 35 new Jokers and 3 new decks from Extra Credit, and 11 Jokers and 19 blinds from Bunco. The new Jokers and edition are added to help with build variety, and some to give love to ranks, enhancements, and hands with little existing synergies. The new blinds are added to generally provide more variety, especially for Gold Stake's new effect.
 
 ## Changes
 ### Hands and Discards

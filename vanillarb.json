@@ -11,6 +11,6 @@
         "Steamodded (>=1.0.0~BETA-0827)"
     ],
     "priority": 2,
-    "version": "1.0.3~BETA",
+    "version": "1.0.3a~BETA",
     "allow_redistribution": true
 }
