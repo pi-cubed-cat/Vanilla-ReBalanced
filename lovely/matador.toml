@@ -7,10 +7,10 @@ priority = -1
 [patches.pattern]
 target = "card.lua"
 pattern = '''
-if self.ability.name == 'Raised Fist' then
+if self.ability.name == 'Matador' then
 '''
 position = "at"
 payload = '''
-if false and self.ability.name == 'Raised Fist' then -- killed by vanillarebalanced
+if false and self.ability.name == 'Matador' then -- killed by vanillarebalanced
 '''
 match_indent = true
