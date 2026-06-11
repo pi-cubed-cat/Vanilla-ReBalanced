@@ -49,6 +49,7 @@ SMODS.Joker:take_ownership("crafty", { -- Crafty Joker
 }, false)
 
 SMODS.Joker:take_ownership('matador', { -- Matador
+    name = "Matador 2",
     cost = 6,
     config = { extra = { money = 3 } },
 	loc_vars = function(self, info_queue, card)
@@ -69,10 +70,12 @@ SMODS.Joker:take_ownership('hanging_chad', { -- Hanging Chad
     rarity = 2,
 }, false)
 
+--[[
 SMODS.Joker:take_ownership('ceremonial', { -- Ceremonial Dagger
     rarity = 1,
 	cost = 4,
 }, false)
+]]
 
 SMODS.Joker:take_ownership('fortune_teller', { -- Fortune Teller
 	cost = 4,
@@ -87,18 +90,19 @@ SMODS.Joker:take_ownership('supernova', { -- Supernova
 }, false)
 
 SMODS.Joker:take_ownership('square', { -- Square Joker
-	config = { extra = { chips = 16, chip_mod = 4 } },
+    name = "Square Joker 2",
+    pixel_size = { h = 71 },
+    config = { extra = { chips = 16, chip_mod = 4 } },
 	loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.chip_mod } }
     end,
     calculate = function(self, card, context)
         if context.before and not context.blueprint and #context.full_hand == 4 then
-            -- See note about SMODS Scaling Manipulation on the wiki
-            card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
-            return {
-                message = localize('k_upgrade_ex'),
-                colour = G.C.CHIPS
-            }
+            SMODS.scale_card(self, {
+                ref_table = self.ability.extra,
+                ref_value = "chips",
+                scalar_value = "chip_mod",
+            })
         end
         if context.joker_main and card.ability.extra.chips > 0 then
             return {
@@ -232,6 +236,20 @@ function Blind:debuff_hand(cards, hand, handname, check)
 	end
 end
 
+local SMODS_recalc_debuff_ref = SMODS.recalc_debuff
+function SMODS.recalc_debuff(card)
+    if not (next(SMODS.find_card('j_splash'))) then
+        SMODS_recalc_debuff_ref(self)
+    end
+end
+
+local debuff_card_ref = Blind.debuff_card
+function Blind:debuff_card(card, from_blind)
+    if not card.splashed then
+        debuff_card_ref(self, card, from_blind)
+    end
+end
+
 SMODS.Joker:take_ownership('splash', { -- Splash
 	calculate = function(self, card, context)
         if context.press_play and not context.blueprint then
@@ -239,6 +257,7 @@ SMODS.Joker:take_ownership('splash', { -- Splash
 				func = function()
 					for _, v in ipairs(G.play.cards) do
 						v.debuff = false
+                        v.splashed = true
 					end
 					return true
 				end
@@ -249,11 +268,25 @@ SMODS.Joker:take_ownership('splash', { -- Splash
                 add_to_hand = true
             }
         end
+        if context.end_of_round and not context.blueprint then
+			 G.E_MANAGER:add_event(Event({
+				func = function()
+					for _, v in ipairs(G.playing_cards) do
+                        v.splashed = false
+					end
+					return true
+				end
+			}))
+		end
     end
 }, false)
 
 SMODS.Joker:take_ownership('bootstraps', { -- Bootstraps
+    name = "Boostraps 2",
 	config = {extra = {mult = 1, dollars = 5}},
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.mult, card.ability.extra.dollars, card.ability.extra.mult * math.floor(((G.GAME.dollars or 0) + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars) } }
+    end,
 	calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and
             (context.other_card:is_suit('Hearts') or context.other_card:is_suit('Diamonds')) then
@@ -267,6 +300,7 @@ SMODS.Joker:take_ownership('bootstraps', { -- Bootstraps
 }, false)
 
 SMODS.Joker:take_ownership('loyalty_card', { -- Loyalty Card
+    name = "Loyalty Card 2",
 	cost = 6,	
 	config = { extra = { every = 10, loyalty_remaining = 10 } },
     loc_vars = function(self, info_queue, card)
@@ -344,6 +378,7 @@ SMODS.Joker:take_ownership('loyalty_card', { -- Loyalty Card
 }, false)
 
 SMODS.Joker:take_ownership('raised_fist', { -- Raised Fist
+    name = "Matador 2",
 	calculate = function(self, card, context)
         if context.individual and context.cardarea == G.hand and not context.end_of_round then
             local temp_Mult, temp_ID = 15, 15
@@ -369,6 +404,72 @@ SMODS.Joker:take_ownership('raised_fist', { -- Raised Fist
             end
         end
     end
+}, false)
+
+-- Seeing Double
+local function has_any_other_suit(count, suit)
+    for k, v in pairs(count) do
+        if k ~= suit then
+            if v > 0 then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+local function saw_double(count, suit)
+    if count[suit] > 0 and has_any_other_suit(count, suit) then return true else return false end
+end
+
+local SMODS_seeing_double_check_ref = SMODS.seeing_double_check
+function SMODS.seeing_double_check(hand, suit, bypass_debuff)
+    if not bypass_debuff then
+        return SMODS_seeing_double_check_ref(hand, suit)
+    end
+    local suit_tally = {}
+    for i = #SMODS.Suit.obj_buffer, 1, -1 do
+        suit_tally[SMODS.Suit.obj_buffer[i]] = 0
+    end
+    for i = 1, #hand do
+        if not SMODS.has_any_suit(hand[i]) then
+            for k, v in pairs(suit_tally) do
+                if hand[i]:is_suit(k, bypass_debuff) then suit_tally[k] = suit_tally[k] + 1 end
+            end
+        end
+    end
+    for i = 1, #hand do
+        if SMODS.has_any_suit(hand[i]) then
+            if hand[i]:is_suit(suit) and suit_tally[suit] == 0 then suit_tally[suit] = suit_tally[suit] + 1 end
+            for k, v in pairs(suit_tally) do
+                if hand[i]:is_suit(k) and suit_tally[k] == 0  then suit_tally[k] = suit_tally[k] + 1 end
+            end
+        end
+    end
+    if saw_double(suit_tally, suit) then return true else return false end
+end
+
+SMODS.Joker:take_ownership('seeing_double', { -- Seeing Double
+	name = 'Seeing Double',
+    config = { extra = { xmult = 2 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult } }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main and SMODS.seeing_double_check(context.scoring_hand, 'Clubs', true) then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end,
+}, false)
+
+SMODS.Joker:take_ownership('order', { -- The Order
+    config = { x_mult = 3.5, type = 'Straight' },
+}, false)
+
+SMODS.Joker:take_ownership('tribe', { -- The Tribe
+    config = { x_mult = 2.5, type = 'Flush' },
 }, false)
 
 SMODS.Atlas {

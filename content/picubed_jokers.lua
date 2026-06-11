@@ -527,6 +527,89 @@ SMODS.Joker { -- Hide 'n Seek
     end
 }
 
+local function reset_monkey_ranks() -- Monkey See, Monkey Do (utils)
+	G.GAME.current_round.picubed_monkeysee = { rank = 'King', id = 13 }
+	G.GAME.current_round.picubed_monkeydo = { rank = 'Ace', id = 14 }
+    local valid_monkey_cards = {}
+    for _, playing_card in ipairs(G.playing_cards) do
+        if not SMODS.has_no_rank(playing_card) then
+            valid_monkey_cards[#valid_monkey_cards + 1] = playing_card
+        end
+    end
+    local monkeysee_card = pseudorandom_element(valid_monkey_cards, pseudoseed('picubed_monkeysee' .. G.GAME.round_resets.ante))
+    if monkeysee_card then
+		G.GAME.current_round.picubed_monkeysee.rank = monkeysee_card.base.value
+        G.GAME.current_round.picubed_monkeysee.id = monkeysee_card.base.id
+    end
+	valid_monkey_cards = {}
+	for _, playing_card in ipairs(G.playing_cards) do
+		if not SMODS.has_no_rank(playing_card) and playing_card.base.id ~= monkeysee_card.base.id then
+            valid_monkey_cards[#valid_monkey_cards + 1] = playing_card
+        end
+    end
+	local monkeydo_card = pseudorandom_element(valid_monkey_cards, pseudoseed('picubed_monkeydo' .. G.GAME.round_resets.ante))
+	if G.GAME.current_round.picubed_monkeysee.rank == 'Ace' and G.GAME.current_round.picubed_monkeydo.rank == 'Ace' then -- prevent this specific case of dupes
+		G.GAME.current_round.picubed_monkeydo.rank = 'King'
+		G.GAME.current_round.picubed_monkeydo.id = 14
+	end
+	if monkeydo_card then
+        G.GAME.current_round.picubed_monkeydo.rank = monkeydo_card.base.value
+        G.GAME.current_round.picubed_monkeydo.id = monkeydo_card.base.id
+    end
+end
+
+SMODS.Joker { -- Monkey See, Monkey Do
+	key = 'monkeyseemonkeydo',
+	loc_txt = {
+		name = 'Monkey See, Monkey Do',
+		text = {
+			"Each played {C:attention}#1#{} and {C:attention}#2#{}", 
+			"gives {C:mult}+#3#{} Mult when scored",
+            "{s:0.8}Ranks change every {}{s:0.8,C:attention}hand{}",
+		}
+	},
+	pronouns = 'he_him',
+	config = { extra = { mult = 8 } },
+	rarity = 1,
+	atlas = 'PiCubedsJokers',
+	pos = { x = 4, y = 9 },
+	cost = 4,
+	discovered = true,
+	blueprint_compat = true,
+    perishable_compat = true,
+	eternal_compat = true,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { localize((G.GAME.current_round.picubed_monkeysee or {}).rank or 'King', 'ranks'), localize((G.GAME.current_round.picubed_monkeydo or {}).rank or 'Ace', 'ranks'), card.ability.extra.mult } }
+    end,
+	calculate = function(self, card, context)
+        if not G.GAME.current_round.picubed_monkeysee then -- initialise on first play
+			G.GAME.current_round.picubed_monkeysee = { rank = 'King', id = 13 }
+			G.GAME.current_round.picubed_monkeydo = { rank = 'Ace', id = 14 }
+		end
+		if context.individual and context.cardarea == G.play then
+			if context.other_card:get_id() == G.GAME.current_round.picubed_monkeysee.id or context.other_card:get_id() == G.GAME.current_round.picubed_monkeydo.id then
+				return {
+					mult = card.ability.extra.mult
+				}
+			end
+        end
+		if context.after and not context.blueprint then
+			G.E_MANAGER:add_event(Event({
+				func = (function()
+					reset_monkey_ranks()
+					return true
+				end)
+			}))
+		end
+	end
+}
+
+local startRef = Game.start_run -- Monkey See, Monkey Do (utils)
+function Game:start_run(args)
+	startRef(self, args)
+	reset_monkey_ranks()
+end
+
 SMODS.Joker { -- On-beat
 	key = 'onbeat',
 	pronouns = 'he_him',
@@ -621,37 +704,33 @@ SMODS.Joker { --Forgery
 			else
 				card_mult = card_is_kil.base.nominal or 0
 			end
+
+			-- permanent +chips or holding +chips
 			card_mult = card_mult + (card_is_kil.ability.perma_bonus or 0) + (card_is_kil.ability.perma_h_chips or 0)
-			if SMODS.has_enhancement(card_is_kil, 'm_bonus') then -- bonus card (vanilla)
-				card_mult = card_mult + 30
-			elseif SMODS.has_enhancement(card_is_kil, 'm_stone') then -- stone card (vanilla)
-				card_mult = card_mult + 50
-			elseif SMODS.has_enhancement(card_is_kil, 'm_akyrs_ash_card') then -- ash card (aikoyori's shenanigans)
-				card_mult = card_mult + 30
-			end
+			
+			-- enhancement +chips
+			card_mult = card_mult + (card_is_kil.ability.bonus or 0)
+			
 			if card_is_kil.edition then
-				if card_is_kil.edition.key == 'e_foil' then -- foil (vanilla)
-						card_mult = card_mult + 50
-				elseif card_is_kil.edition.key == 'e_cry_noisy' then -- noisy (cryptid)
-						card_mult = card_mult + pseudorandom('noisy') * 150
-				elseif card_is_kil.edition.key == 'e_ortalab_anaglyphic' then -- anaglyphic (ortalab)
-						card_mult = card_mult + 20
-				elseif card_is_kil.edition.key == 'e_cry_mosaic' then -- mosaic (cryptid)
-						card_mult = 2.5 * card_mult
-				elseif card_is_kil.edition.key == 'e_akyrs_texelated' then -- texelated (aikoyori's shenanigans)
-						card_mult = 0.8 * card_mult
-				elseif card_is_kil.edition.key == 'e_bunc_glitter' then -- glitter (bunco)
-						card_mult = 1.3 * card_mult
-				elseif card_is_kil.edition.key == 'e_yahimod_evil' then -- evil (yahimod)
-						card_mult = 1.5 * card_mult
+				-- edition +chips
+				if card_is_kil.edition.key == 'e_cry_noisy' then -- noisy (cryptid)
+					card_mult = card_mult + pseudorandom('noisy') * (card_is_kil.edition.max_chips or 0) + (card_is_kil.edition.min_chips or 0)
+				else
+					card_mult = card_mult + (card_is_kil.edition.chips or 0)
 				end
+
+				-- edition xchips
+				card_mult = card_mult * (card_is_kil.edition.x_chips or 1)
 			end
-			if card_is_kil.ability.perma_x_chips and card_is_kil.ability.perma_x_chips > 1 then
-				card_mult = card_mult * card_is_kil.ability.perma_x_chips
-			end
-			if card_is_kil.ability.perma_h_x_chips and card_is_kil.ability.perma_h_x_chips > 1 then
-				card_mult = card_mult * card_is_kil.ability.perma_h_x_chips
-			end
+
+			-- enhancement xchips or holding xchips
+			card_mult = card_mult * (card_is_kil.ability.x_chips or 0)
+			card_mult = card_mult * (card_is_kil.ability.h_x_chips or 0)
+
+			-- permanent xchips or holding xchips
+			card_mult = card_mult * ((card_is_kil.ability.perma_x_chips or 0) + 1)
+			card_mult = card_mult * ((card_is_kil.ability.perma_h_x_chips or 0) + 1)
+			
 			if card_mult > 0 then
 				return {
 					mult = card_mult

@@ -8,9 +8,12 @@
     "badge_colour": "e14159",
     "display_name": "ReBalanced",
     "dependencies": [
-        "Steamodded (>=1.0.0~BETA-0827)"
+        "Steamodded (>=1.0.0~BETA-1620a)"
     ],
+    "conflicts": [
+		"JokerDisplay"
+	],
     "priority": 2,
-    "version": "1.0.3b~BETA",
+    "version": "1.0.4~BETA",
     "allow_redistribution": true
 }

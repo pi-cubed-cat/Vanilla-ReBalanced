@@ -57,8 +57,8 @@ SMODS.Joker:take_ownership('ExtraCredit_handbook', {
     loc_txt = {
         ['name'] = 'Handbook',
         ['text'] = {
-            [1] = "This Joker gains {C:mult}+#1#{} Mult if played",
-            [2] = "{C:attention}poker hand{} has {C:attention}not{}",
+            [1] = "This Joker gains {C:mult}+#1#{} Mult if",
+            [2] = "played {C:attention}poker hand{} has {C:attention}not{}",
             [3] = "already been played this round",
             [4] = "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
         }
@@ -84,7 +84,14 @@ SMODS.Joker:take_ownership('ExtraCredit_handbook', {
     end
 }, true)
 
+local bisexual_tag_key = next(SMODS.find_mod("picubedsjokers")) and 'tag_picubed_bisexual' or 'tag_vanillarb_bisexual'
 SMODS.Joker:take_ownership('ExtraCredit_montehaul', {
+    config = {
+        extra = {
+            monty_rounds = 0,
+            flavours = {'tag_foil','tag_holo','tag_polychrome','tag_negative','tag_uncommon','tag_rare',bisexual_tag_key}
+        }
+    },
     loc_txt = {
         ['name'] = 'Monte Haul',
         ['text'] = {
@@ -100,7 +107,7 @@ SMODS.Joker:take_ownership('ExtraCredit_montehaul', {
         info_queue[#info_queue+1] = {key = 'tag_holo', set = 'Tag'}
         info_queue[#info_queue+1] = {key = 'tag_polychrome', set = 'Tag'}
         info_queue[#info_queue+1] = {key = 'tag_negative', set = 'Tag'}
-        info_queue[#info_queue+1] = {key = 'tag_vanillarb_bisexual', set = 'Tag'}
+        info_queue[#info_queue+1] = {key = bisexual_tag_key, set = 'Tag'}
         info_queue[#info_queue+1] = {key = 'tag_uncommon', set = 'Tag'}
         info_queue[#info_queue+1] = {key = 'tag_rare', set = 'Tag'}
         return {vars = {card.ability.extra.monty_rounds}}

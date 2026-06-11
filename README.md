@@ -1,6 +1,7 @@
 Vanilla ReBalanced is a content mod that aims to balance existing vanilla content and add new Jokers for the sake of build variety in high stakes.  
 Requires [Steamodded 1.0.0-beta-0827c](https://github.com/Steamodded/smods/releases/tag/1.0.0-beta-0827c) or later.
 For the best experience, also download the [**Extra Credit**](https://github.com/GuilloryCraft/ExtraCredit) and [**Bunco (jumbocarrot fork)**](https://github.com/jumbocarrot0/Bunco) mods, as Vanilla ReBalanced is designed to utilise some of their additional content.
+Currently incompatible with JokerDisplay due to some crashes or inconsistencies with certain Jokers. This will be fixed eventually, apologies in the meanwhile!
 
 This mod takes enormous inspiration from the two videos below and aims to manifest as much as possible:
 
@@ -11,7 +12,7 @@ https://www.youtube.com/watch?v=8lli4u6jKCg
 https://www.youtube.com/watch?v=pA_DiPpJkX8
 
 ## Additions
-Vanilla ReBalanced initially includes 14 new Jokers, mostly with art and/or abilities lifted from my other mods. Chaos Theory's card art was designed by LumpyTouch, and was intended to be implemented for Balatro but scrapped. Wee Mini and Forgery have new abilities based on some ideas presented in BU's video. In addition, the mod includes a new edition and a related tag, intended to be a new method of obtaining Tarot cards.  
+Vanilla ReBalanced initially includes 15 new Jokers, mostly with art and/or abilities lifted from my other mods. Chaos Theory's card art was designed by LumpyTouch, and was intended to be implemented for Balatro but scrapped. Wee Mini and Forgery have new abilities based on some ideas presented in BU's video. In addition, the mod includes a new edition and a related tag, intended to be a new method of obtaining Tarot cards.  
 With Extra Credit and Bunco as intended, Vanilla ReBalanced also includes 35 new Jokers and 3 new decks from Extra Credit, and 11 Jokers and 19 blinds from Bunco. The new Jokers and edition are added to help with build variety, and some to give love to ranks, enhancements, and hands with little existing synergies. The new blinds are added to generally provide more variety, especially for Gold Stake's new effect.
 
 ## Changes
@@ -49,8 +50,6 @@ With Extra Credit and Bunco as intended, Vanilla ReBalanced also includes 35 new
 - Crafty Joker gives +80 -> +100 Chips when activating
   - (From BU's video) buffs given to specific Jokers depending on their required poker hand, as especially some of the Mult values were too low.
 - Mime is Uncommon -> Rare (From FS's video)
-- Ceremonial Dagger is Uncommon -> Common (From FS's video)
-- Ceremonial Dagger costs $6 -> $4 (From FS's video)
 - 8 Ball is pink now
 - Raised Fist now activates on the left-most card of lowest ranks, in order for better synergy with in-hand XMult and effects
 - Scholar gives +4 -> +5 Mult on scoring cards (inspired from FS's video)
@@ -66,19 +65,24 @@ With Extra Credit and Bunco as intended, Vanilla ReBalanced also includes 35 new
   - A harsher nerf to account for the higher starting number of Discards
 - Fortune Teller costs $6 -> $4 (From FS's video)
 - Hanging Chad is Common -> Uncommon (From FS's video)
+- The Order gives X3 -> X3.5 Mult
+- The Tribe gives X2 -> X2.5 Mult
+- Seeing Double now uses poker hand's cards instead of scoring cards to determine if a Club and non-Club has been played. This mainly affects played debuffed cards.
 
 ### Vouchers
 - Hone and Glow up now affect cards in the shop created by Magic Trick, and make the new Bisexual edition more likely to appear
-- Telescope has been reworked: Your most played poker hand's corresponding Planet card may appear multiple times
+- Telescope has been reworked: Now has the ability of vanilla Observatory, and additionally your most played poker hand's corresponding Planet card may appear multiple times
+- Observatory has been reworked: Now has the ability of vanilla Telescope
 - Tarot Tycoon has been reworked: Every shop has an additional free Mega Arcana Pack
-- Planet Tycoon has been reworked: Negative Planet cards can be purchased from the Shop
+- Planet Tycoon has been reworked: Planet cards create a Negative copy when bought from the shop 
 - Magic Trick now allows for cards to appear with Enhancements, Editions and/or Seals (bug fixed!) without needing Illusion (From BU's video)
-- Illusion has been reworked: Spectral cards can be purchased from the Shop
+- Illusion has been reworked: Spectral cards can be purchased from the shop
 - Hieroglyph and Petroglyph have their abilities swapped (To accomodate the lower starting number of Hands)
 
 ### Decks
 - Green Deck gives $2 -> $3 per hand and $1 -> $2 per discard (To accomodate the lower starting number of Hands)
 - Black Deck starts with -1 hand -> -1 discard (To accomodate the lower starting number of Hands)
+- Nebula Deck now also starts with the (reworked) Observatory voucher (To retain the original identity of the deck)
 - Ghost Deck now starts with the reworked Magic Trick and Illusion vouchers instead of simply adding Spectral cards to the shop
 - Anaglyph Deck now also begins with creating a Double Tag at the start of run (From FS's video)
 

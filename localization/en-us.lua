@@ -1,7 +1,7 @@
 return {
     descriptions = {
         Back = {
-            b_ghost = {
+            b_ghost = { -- Ghost Deck
                 text = {
                     "Start run with the",
                     "{C:attention,T:v_magic_trick}#1#{} and",
@@ -9,7 +9,7 @@ return {
                     "and a {C:spectral,T:c_hex}#3#{} card",
                 },
             },
-            b_black = {
+            b_black = { -- Black Deck
                 text = {
                     "{C:attention}+#1#{} Joker slot",
                     "",
@@ -17,7 +17,25 @@ return {
                     "every round",
                 },
             },
-            b_anaglyph = {
+            b_nebula = { -- Nebula Deck
+                text = {
+                    "Start run with the",
+                    "{C:planet,T:v_telescope}#1#{} and",
+                    "{C:planet,T:v_observatory}#2#{} vouchers",
+                    " ",
+                    "{C:red}#3#{} consumable slot",
+                },
+                unlock = {
+                    --[["Win a run with",
+                    "{C:attention}#1#{}",
+                    "on any difficulty",
+                    "and unlock the",
+                    "{C:planet,T:v_observatory}#2#{} voucher",]]
+                    "Unlock the {C:planet}#2#{}",
+                    "voucher and",
+                }
+            },
+            b_anaglyph = { -- Anaglyph Deck
                 text = {
                     "Gain a {C:attention,T:tag_double}#1#",
                     "at start of run and after",
@@ -89,7 +107,7 @@ return {
                 text = {
                     "{C:chips}+#1#{} Chips for each",
                     "card of a unique suit",
-                    "in scoring hand",
+                    "in poker hand",
                 },
             },
             j_splash = { -- Splash
@@ -114,6 +132,14 @@ return {
                     "{C:inactive}({C:attention}#2#{} {C:inactive}remaining){}",
                 },
             },
+            j_seeing_double = { -- Seeing Double
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult if poker",
+                    "hand has a {C:clubs}Club{} card",
+                    "and another card",
+                    "of any other {C:attention}suit{}",
+                },
+            },
             j_vanillarb_chaostheory = { -- Chaos Theory
                 name = 'Chaos Theory',
                 text = {
@@ -134,9 +160,8 @@ return {
                 name = 'Eye Patch',
                 text = {
                    "This Joker gains {X:mult,C:white}X#2#{} Mult",
-                   "if {C:attention}poker hand{} has {C:attention}not{}",
-                   "been played this {C:attention}Ante{}, resets",
-                   "when {C:attention}Boss Blind{} is defeated",
+                   "for each unique {C:attention}poker hand{}",
+                   "played {C:attention}this Ante{}",
                    "{C:inactive}(Currently {X:mult,C:white}X#1#{} {C:inactive}Mult){}",
                 }
             },
@@ -199,8 +224,8 @@ return {
             j_vanillarb_onbeat = {
                 name = "On-beat",
                 text = {
-                    "Retrigger the {C:attention}third{}",
-                    "and {C:attention}fifth{} scoring cards",
+                    "Retrigger the {C:attention}3rd{}",
+                    "and {C:attention}5th{} scoring cards",
                     "each hand",
                 }
             },
@@ -300,17 +325,30 @@ return {
             },
             v_planet_tycoon = { -- Planet Tycoon
                 text = {
-                    "{C:dark_edition}Negative{} {C:planet}Planet cards{}",
-                    "can be purchased",
-                    "from the {C:attention}shop",
+                    "{C:planet}Planet{} cards create",
+                    "a {C:dark_edition}Negative{} copy when",
+                    "purchased from the {C:attention}shop",
                 },
             },
             v_telescope = { -- Telescope
                 text = {
+                    "{C:planet}Planet{} cards in your",
+                    "{C:attention}consumable{} area give",
+                    "{X:red,C:white} X#1# {} Mult for their",
+                    "specified {C:attention}poker hand",
+                    "{C:inactive}------------------{}",
                     "Your most played {C:attention}poker{}",
                     "{C:attention}hand{}'s corresponding",
                     "{C:planet}Planet{} card may",
                     "appear multiple times",
+                }
+            },
+            v_observatory = { -- Observatory
+                text = {
+                    "{C:attention}Celestial Packs{} always",
+                    "contain the {C:planet}Planet{}",
+                    "card for your most",
+                    "played {C:attention}poker hand",
                 }
             },
             v_hieroglyph = { -- Hieroglyph

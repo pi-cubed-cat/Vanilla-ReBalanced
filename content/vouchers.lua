@@ -22,7 +22,7 @@ SMODS.Voucher:take_ownership('illusion', {
 }, false)
 
 SMODS.Voucher:take_ownership('tarot_tycoon', {
-    config = {},
+    name = "Tarot Tycoon 2",
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.p_arcana_mega_1
         return { vars = {} }
@@ -52,30 +52,17 @@ SMODS.Voucher:take_ownership('tarot_tycoon', {
 }, false)
 
 SMODS.Voucher:take_ownership('planet_tycoon', {
-    config = {},
+    name = "Planet Tycoon 2",
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'e_negative_consumable', set = 'Edition', config = { extra = 1 } }
         return { vars = {} }
     end,
-    redeem = function(self, card) -- don't turn existing cards negative
-        if G.shop_jokers and G.shop_jokers.cards then
-            for k,v in ipairs(G.shop_jokers.cards) do
-                if v.ability.set == "Planet" and not v.tycooned then
-                    v.tycooned = true
-                end
-            end
-        end
-    end,
-    update = function(self, card, dt)
-        if G.shop_jokers and G.shop_jokers.cards then
-            for k,v in ipairs(G.shop_jokers.cards) do
-                if v.ability.set == "Planet" and not v.tycooned then
-                    v.tycooned = true
-                    if pseudorandom(pseudoseed('planet_tycoon')) > 0.9 then
-                        v:set_edition('e_negative', true)
-                    end
-                end
-            end
+    calculate = function(self, card, context)
+        if context.buying_card and context.card.ability.set == 'Planet' then
+            local copied_card = copy_card(context.card, nil)
+            copied_card:add_to_deck()
+            copied_card:set_edition('e_negative')
+            G.consumeables:emplace(copied_card)
         end
     end,
 }, false)
@@ -103,7 +90,51 @@ function SMODS.showman(card_key)
 end
 
 SMODS.Voucher:take_ownership('telescope', {
-    
+    config = { extra = { Xmult = 1.5 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.Xmult } }
+    end,
+    calculate = function(self, card, context)
+        if context.other_consumeable and context.other_consumeable.ability.set == 'Planet' and context.other_consumeable.ability.consumeable.hand_type == context.scoring_name then
+            return {
+                x_mult = card.ability.extra.Xmult,
+                message_card = context.other_consumeable
+            }
+        end
+    end,
+}, false)
+
+SMODS.Voucher:take_ownership('observatory', {
+    calculate = function(self, card, context)
+        if context.create_booster_card and context.booster.config.center.kind == "Celestial"
+            and context.index == 1 then
+            local _planet, _hand, _tally = nil, nil, 0
+            for _, handname in ipairs(G.handlist) do
+                if SMODS.is_poker_hand_visible(handname) and G.GAME.hands[handname].played > _tally then
+                    _hand = handname
+                    _tally = G.GAME.hands[handname].played
+                end
+            end
+            if _hand then
+                for _, v in pairs(G.P_CENTER_POOLS.Planet) do
+                    if v.config.hand_type == _hand then
+                        _planet = v.key
+                    end
+                end
+            end
+            if _planet then
+                return {
+                    booster_create_flags = {
+                        set = "Planet",
+                        area = G.pack_cards,
+                        skip_materialize = true,
+                        soulable = true,
+                        key = _planet,
+                    }
+                }
+            end
+        end
+    end,
 }, false)
 
 SMODS.Voucher:take_ownership('hieroglyph', {

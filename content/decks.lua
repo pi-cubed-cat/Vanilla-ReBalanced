@@ -20,6 +20,32 @@ SMODS.Back:take_ownership('black', {
     end,
 }, false)
 
+SMODS.Back:take_ownership('nebula', {
+    config = { vouchers = {'v_telescope', 'v_observatory'}, consumable_slot = -1 },
+    unlocked = false,
+    loc_vars = function(self, info_queue, back)
+        return { vars = { 
+            localize { type = 'name_text', key = self.config.vouchers[1], set = 'Voucher' }, 
+            localize { type = 'name_text', key = self.config.vouchers[2], set = 'Voucher' },
+            self.config.consumable_slot
+         } }
+    end,
+    locked_loc_vars = function(self, info_queue, back)
+        local other_name1 = localize('k_unknown')
+        local other_name2 = localize('k_unknown')
+        if G.P_CENTERS['b_blue'].unlocked then
+            other_name1 = localize { type = 'name_text', set = 'Back', key = 'b_blue' }
+        end
+        if G.P_CENTERS['v_observatory'].unlocked then
+            other_name2 = localize { type = 'name_text', key = self.config.vouchers[2], set = 'Voucher' }
+        end
+        return { vars = { other_name1, other_name2 } }
+    end,
+    check_for_unlock = function(self, args)
+        return args.type == 'win_deck' and get_deck_win_stake('b_blue') and G.P_CENTERS['v_observatory'].unlocked and true
+    end
+}, false)
+
 SMODS.Back:take_ownership('anaglyph', {
     apply = function(self, back)
         G.E_MANAGER:add_event(Event({
