@@ -1,5 +1,5 @@
 Vanilla ReBalanced is a content mod that aims to balance existing vanilla content and add new Jokers for the sake of build variety in high stakes.  
-Requires [Steamodded 1.0.0-beta-0827c](https://github.com/Steamodded/smods/releases/tag/1.0.0-beta-0827c) or later.
+Requires [Steamodded 1.0.0~BETA-1620a](https://github.com/Steamodded/smods/releases/tag/1.0.0-beta-1620a) or later.
 For the best experience, also download the [**Extra Credit**](https://github.com/GuilloryCraft/ExtraCredit) and [**Bunco (jumbocarrot fork)**](https://github.com/jumbocarrot0/Bunco) mods, as Vanilla ReBalanced is designed to utilise some of their additional content.
 Currently incompatible with JokerDisplay due to some crashes or inconsistencies with certain Jokers. This will be fixed eventually, apologies in the meanwhile!
 
